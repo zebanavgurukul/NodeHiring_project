@@ -10,12 +10,13 @@ var knex = require("knex")({
 });
 module.exports = knex;
 
-knex.schema.hasTable('').then((exists) => {
+knex.schema.hasTable('userTables').then((exists) => {
     if (!exists) {
-        return knex.schema.createTable('', (table) => {
-            table.increments('')
-            table.string('')
-            table.string('')
+        return knex.schema.createTable('userTables', (table) => {
+            table.increments('id')
+            table.string('title')
+            table.string('description')
+            table.string('video')
         })
         .catch((err) => {
             console.log(err,"There is some err while writing the quety")
