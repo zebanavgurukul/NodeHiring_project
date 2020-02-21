@@ -24,3 +24,19 @@ knex.schema.hasTable('userTables').then((exists) => {
     }
     return console.log('table is created!')
 });
+
+knex.schema.hasTable('Feature_Tables').then((exists) => {
+    if (!exists) {
+        return knex.schema.createTable('Feature_Tables', (table) => {
+            table.increments('id')
+            table.string('Feature')
+            table.string('Private')
+            table.string('Unlisted')
+            table.string('Public')
+        })
+        .catch((err) => {
+            console.log(err,"There is some err while writing the quety")
+        })
+    }
+    return console.log('table is created!')
+});
