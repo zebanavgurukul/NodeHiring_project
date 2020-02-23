@@ -80,4 +80,48 @@ youtube.put('/put/:search',(req,res) => {
     })
 });
 
+// 6
+youtube.post('/post_data',(req,res) => {
+    var updata = {
+        Name : req.body.Name,
+        Email : req.body.Email,
+        Password : req.body.Password
+    }
+    youtubeDB.postData(updata)
+    .then(() => {
+        res.send('insert')
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
+// 7
+youtube.post("/access",(req,res)=>{
+    let Email = req.body.Email;
+    let Password = req.body.Password;
+    youtubeDB.access_login(Email)
+    .then((data)=>{
+        if(data.length == 0){
+            res.send('worng Email')
+        }else{youtubeDB.else_login(Password).then((data)=>{
+            if(data.length == 0){
+                res.send('wrong Password ')
+            }else{
+                var data = {
+                    title : "Asal Mein - Darshan Raval | Official Video | Indie Music Label",
+                    description : "wow nice song",
+                    video : "https://www.youtube.com/watch?v=beqprrnaKFc"
+                }
+                youtubeDB.putdate(data)
+                .then(() => {
+                    res.send('insert')
+                })
+                }
+            })
+        }
+    }).catch((err)=>{
+        console.log(err);
+    })
+});
+
 module.exports = youtube

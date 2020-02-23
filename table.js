@@ -40,3 +40,18 @@ knex.schema.hasTable('Feature_Tables').then((exists) => {
     }
     return console.log('table is created!')
 });
+
+knex.schema.hasTable('access_youtube').then((exists) => {
+    if (!exists) {
+        return knex.schema.createTable('access_youtube', (table) => {
+            table.increments('id')
+            table.string('Name')
+            table.string('Email')
+            table.string('Password')
+        })
+        .catch((err) => {
+            console.log(err,"There is some err while writing the quety")
+        })
+    }
+    return console.log('table is created!')
+});
