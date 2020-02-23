@@ -58,11 +58,13 @@ youtube.get('/get',(req,res) => {
         var video = Response[i]['video']
         var video_id = getYouTubeID(video);
     }
+    res.send({video_id})
     }).catch((err) => {
         res.send(err)
     })
 });
 
+// 5
 youtube.put('/put/:search',(req,res) => {
     var search = req.params.search
     var updata = {
