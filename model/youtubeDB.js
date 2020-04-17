@@ -43,4 +43,8 @@ let putdate = (data) => {
     return knex('userTables').insert(data)
 };
 
-module.exports = {post_data,putdata,postdata,getdata,put_data,postData,access_login,else_login,putdate}
+let getdata_id = (id) => {
+    return knex('userTables').select('*').where('id',id)
+};
+
+module.exports = {post_data,putdata,postdata,getdata,put_data,postData,access_login,else_login,putdate,getdata_id}

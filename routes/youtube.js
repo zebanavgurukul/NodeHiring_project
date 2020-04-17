@@ -1,7 +1,8 @@
 const express = require("express");
-const youtube = express.Router();
+const youtube = express();
 const youtubeDB   = require("../model/youtubeDB")
 var getYouTubeID = require('get-youtube-id');
+require('dotenv').config()
 
 // 1
 youtube.post('/post',(req,res) => {
@@ -121,6 +122,16 @@ youtube.post("/access",(req,res)=>{
         }
     }).catch((err)=>{
         console.log(err);
+    })
+});
+
+youtube.get('/getdata/:id',(req,res) => {
+    let id = req.params.id
+    youtubeDB.getdata_id(id)
+    .then((Response) => {
+        res.send(Response)
+    }).catch((err) => {
+        res.send(err)
     })
 });
 
